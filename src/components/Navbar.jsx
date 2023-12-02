@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { SiWeb3Dotjs } from "react-icons/si";
 
 const Navbar = () => {
   return (
     <header className='p-3'>
         <div className="container mx-auto flex items-center justify-between">
-           <h1>Logo</h1>
+           <Link to={'/'}><SiWeb3Dotjs size={30}/></Link>
 
             <nav>
                 <ul className='flex items-center gap-20'>
