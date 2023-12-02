@@ -1,4 +1,13 @@
 import React, { useState } from 'react';
+import {initializeApp} from "firebase/app";
+import firebaseConfig from '../utils/firebase'
+import {getFirestore,collection, addDoc} from 'firebase/firestore';
+// Initialize Firebase
+initializeApp(firebaseConfig);
+// console.log(a)
+const db = getFirestore();
+const colRef = collection(db,'transactions')
+
 const TransactionForm = () => {
   const [formData, setFormData] = useState({
     walletAddress: '',
@@ -37,7 +46,12 @@ const TransactionForm = () => {
     // If there are no errors, proceed with form submission
     if (!walletAddressError && !amountError) {
       try {
+        await addDoc(colRef,{
+            walletAddress: formData.walletAddress,
+            amount: formData.amount,
+          });
         console.log('Form submitted:', formData);
+
         // Optionally, you can reset the form data after submission
         setFormData({ walletAddress: '', amount: '' });
       } catch (error) {
